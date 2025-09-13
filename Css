@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Interactive Examples</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin: 30px 0 20px;
+            color: #4ecdc4;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #e6e6e6;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3 span {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .code-example {
+            background-color: #1e2a35;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            flex-grow: 1;
+        }
+        
+        .tag {
+            color: #f92672;
+        }
+        
+        .attribute {
+            color: #a6e22e;
+        }
+        
+        .value {
+            color: #e6db74;
+        }
+        
+        .comment {
+            color: #75715e;
+        }
+        
+        .button {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .interactive-demo {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .output {
+            background: #1e2a35;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            min-height: 50px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .color-box {
+            width: 100px;
+            height: 100px;
+            margin: 15px auto;
+            border-radius: 10px;
+            transition: all 0.5s ease;
+        }
+        
+        .counter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            margin: 15px 0;
+        }
+        
+        .counter button {
+            background: #ff6b6b;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* CSS Example Styles */
+        .css-box {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: #ff6b6b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .flex-container {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .flex-item {
+            background: #4ecdc4;
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .grid-item {
+            background: #ff6b6b;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .animation-demo {
+            width: 100px;
+            height: 100px;
+            margin: 15px auto;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(0.9); }
+        }
+        
+        .transform-demo {
+            width: 100px;
+            height: 100px;
+            margin: 15px auto;
+            background: #4ecdc4;
+            border-radius: 8px;
+            transition: transform 0.5s ease;
+        }
+        
+        .pseudo-demo {
+            width: 150px;
+            height: 50px;
+            margin: 15px auto;
+            background: #ff6b6b;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pseudo-demo:hover {
+            background: #4ecdc4;
+            transform: translateY(-5px);
+        }
+        
+        .pseudo-demo:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .flex-container {
+                flex-direction: column;
+            }
+            
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSS Interactive Examples</h1>
+            <p>Learn CSS through these interactive examples and demonstrations</p>
+        </header>
+        
+        <main>
+            <section>
+                <h2>CSS Basics</h2>
+                <p>CSS (Cascading Style Sheets) is used to style and layout web pages.</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3><span>➊</span> Selectors & Properties</h3>
+                        <div class="code-example">
+                            <span class="comment">/* Element selector */</span><br>
+                            <span class="attribute">p</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">color</span>: <span class="value">blue</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">font-size</span>: <span class="value">16px</span>;<br>
+                            }<br><br>
+                            
+                            <span class="comment">/* Class selector */</span><br>
+                            <span class="value">.highlight</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">background-color</span>: <span class="value">yellow</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">font-weight</span>: <span class="value">bold</span>;<br>
+                            }<br><br>
+                            
+                            <span class="comment">/* ID selector */</span><br>
+                            <span class="tag">#header</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">text-align</span>: <span class="value">center</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">padding</span>: <span class="value">20px</span>;<br>
+                            }
+                        </div>
+                        <button class="button" onclick="toggleHighlight()">Toggle Highlight</button>
+                        <div class="output" id="selectors-output">
+                            <p>This is a normal paragraph.</p>
+                            <p class="highlight-me">This paragraph can be highlighted.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span>➋</span> Box Model</h3>
+                        <div class="code-example">
+                            <span class="value">.box</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">width</span>: <span class="value">200px</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">height</span>: <span class="value">100px</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">padding</span>: <span class="value">20px</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">border</span>: <span class="value">5px solid black</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">margin</span>: <span class="value">30px</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">background-color</span>: <span class="value">lightblue</span>;<br>
+                            }
+                        </div>
+                        <button class="button" onclick="toggleBoxModel()">Toggle Box Model</button>
+                        <div class="output" style="text-align: center;">
+                            <div class="css-box" id="box-model">Box Model</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span>➌</span> Flexbox</h3>
+                        <div class="code-example">
+                            <span class="value">.container</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">display</span>: <span class="value">flex</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">justify-content</span>: <span class="value">space-between</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">align-items</span>: <span class="value">center</span>;<br>
+                            }<br><br>
+                            
+                            <span class="value">.item</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">flex</span>: <span class="value">1</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">text-align</span>: <span class="value">center</span>;<br>
+                            }
+                        </div>
+                        <button class="button" onclick="toggleFlexDirection()">Toggle Direction</button>
+                        <div class="output">
+                            <div class="flex-container" id="flex-demo">
+                                <div class="flex-item">Item 1</div>
+                                <div class="flex-item">Item 2</div>
+                                <div class="flex-item">Item 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>CSS Layouts</h2>
+                <p>Modern CSS layout techniques for creating responsive designs:</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3><span>➍</span> CSS Grid</h3>
+                        <div class="code-example">
+                            <span class="value">.container</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">display</span>: <span class="value">grid</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">grid-template-columns</span>: <span class="value">repeat(3, 1fr)</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">gap</span>: <span class="value">10px</span>;<br>
+                            }<br><br>
+                            
+                            <span class="value">.item</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">grid-column</span>: <span class="value">span 1</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">padding</span>: <span class="value">20px</span>;<br>
+                            &nbsp;&nbsp;<span class="attribute">text-align</span>: <span class="value">center</span>;<br>
+                            }
+                        </div>
+                        <button class="button" onclick="toggleGridLayout()">Toggle Layout</button>
+                        <div class="output">
+                            <div class="grid-container" id="grid-demo">
+                                <div class="grid-item">1</div>
+                                <div class="grid-item">2</div>
+                                <div class="grid-item">3</div>
+                                <div class="grid-item">4</div>
+                                <div class="grid-item">5</div>
+                                <div class="grid-item">6</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span>➎</span> Transforms & Transitions</h3>
+                        <div class="code-example">
+                            <span class="value">.box</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">transition</span>: <span class="value">transform 0.5s ease</span>;<br>
+                            }<br><br>
+                            
+                            <span class="value">.box:hover</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">transform</span>: <span class="value">rotate(45deg) scale(1.2)</span>;<br>
+                            }
+                        </div>
+                        <button class="button" onclick="applyTransform()">Apply Transform</button>
+                        <button class="button" onclick="resetTransform()">Reset</button>
+                        <div class="output" style="text-align: center;">
+                            <div class="transform-demo" id="transform-demo">Hover Me</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span>➏</span> Animations</h3>
+                        <div class="code-example">
+                            <span class="comment">/* Define animation */</span><br>
+                            <span class="tag">@keyframes</span> <span class="attribute">pulse</span> {<br>
+                            &nbsp;&nbsp;<span class="value">0%</span> { <span class="attribute">transform</span>: <span class="value">scale(0.9)</span>; }<br>
+                            &nbsp;&nbsp;<span class="value">50%</span> { <span class="attribute">transform</span>: <span class="value">scale(1.1)</span>; }<br>
+                            &nbsp;&nbsp;<span class="value">100%</span> { <span class="attribute">transform</span>: <span class="value">scale(0.9)</span>; }<br>
+                            }<br><br>
+                            
+                            <span class="comment">/* Apply animation */</span><br>
+                            <span class="value">.element</span> {<br>
+                            &nbsp;&nbsp;<span class="attribute">animation</span>: <span class="value">pulse 2s infinite</span>;<br>
+                            }
+                        </div>
+                        <button class="button" onclick="toggleAnimation()">Toggle Animation</button>
+                        <div class="output" style="text-align: center;">
+                            <div class="animation-demo" id="animation-demo"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Advanced CSS</h2>
+                <p>More advanced CSS features and techniques:</p>
+                
+                <div class="interactive-demo">
+                    <h3>Pseudo-classes</h3>
+                    <div class="code-example">
+                        <span class="value">.button</span> {<br>
+                        &nbsp;&nbsp;<span class="attribute">transition</span>: <span class="value">all 0.3s ease</span>;<br>
+                        }<br><br>
+                        
+                        <span class="value">.button:hover</span> {<br>
+                        &nbsp;&nbsp;<span class="attribute">background-color</span>: <span class="value">#4ecdc4</span>;<br>
+                        &nbsp;&nbsp;<span class="attribute">transform</span>: <span class="value">translateY(-5px)</span>;<br>
+                        }<br><br>
+                        
+                        <span class="value">.button:active</span> {<br>
+                        &nbsp;&nbsp;<span class="attribute">transform</span>: <span class="value">translateY(0)</span>;<br>
+                        }
+                    </div>
+                    <div class="pseudo-demo">Hover Me</div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Created as a CSS learning resource. This page demonstrates modern CSS features and techniques.</p>
+            <p>All code is contained in a single HTML file with embedded CSS.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Selectors example
+        function toggleHighlight() {
+            const element = document.querySelector('.highlight-me');
+            element.classList.toggle('highlight');
+            
+            if (element.classList.contains('highlight')) {
+                element.style.backgroundColor = 'yellow';
+                element.style.fontWeight = 'bold';
+                element.style.padding = '10px';
+            } else {
+                element.style.backgroundColor = '';
+                element.style.fontWeight = '';
+                element.style.padding = '';
+            }
+        }
+        
+        // Box Model example
+        function toggleBoxModel() {
+            const box = document.getElementById('box-model');
+            box.classList.toggle('box-model-active');
+            
+            if (box.classList.contains('box-model-active')) {
+                box.style.padding = '20px';
+                box.style.border = '5px solid white';
+                box.style.margin = '30px';
+                box.style.backgroundColor = 'lightblue';
+                box.style.color = 'black';
+            } else {
+                box.style.padding = '';
+                box.style.border = '';
+                box.style.margin = '';
+                box.style.backgroundColor = '';
+                box.style.color = '';
+            }
+        }
+        
+        // Flexbox example
+        function toggleFlexDirection() {
+            const flexContainer = document.getElementById('flex-demo');
+            
+            if (flexContainer.style.flexDirection === 'column') {
+                flexContainer.style.flexDirection = 'row';
+            } else {
+                flexContainer.style.flexDirection = 'column';
+            }
+        }
+        
+        // Grid example
+        function toggleGridLayout() {
+            const gridContainer = document.getElementById('grid-demo');
+            
+            if (gridContainer.style.gridTemplateColumns === 'repeat(2, 1fr)') {
+                gridContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
+            } else {
+                gridContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            }
+        }
+        
+        // Transform example
+        function applyTransform() {
+            const transformDemo = document.getElementById('transform-demo');
+            transformDemo.style.transform = 'rotate(45deg) scale(1.2)';
+            transformDemo.style.backgroundColor = '#ff6b6b';
+        }
+        
+        function resetTransform() {
+            const transformDemo = document.getElementById('transform-demo');
+            transformDemo.style.transform = '';
+            transformDemo.style.backgroundColor = '';
+        }
+        
+        // Animation example
+        function toggleAnimation() {
+            const animationDemo = document.getElementById('animation-demo');
+            
+            if (animationDemo.style.animationPlayState === 'paused') {
+                animationDemo.style.animationPlayState = 'running';
+            } else {
+                animationDemo.style.animationPlayState = 'paused';
+            }
+        }
+        
+        // Initialize page
+        window.onload = function() {
+            // Add some initial styles for demonstration
+            document.querySelector('.highlight-me').style.transition = 'all 0.3s ease';
+            
+            const transformDemo = document.getElementById('transform-demo');
+            transformDemo.addEventListener('mouseover', function() {
+                this.style.transform = 'rotate(45deg) scale(1.2)';
+                this.style.backgroundColor = '#ff6b6b';
+            });
+            
+            transformDemo.addEventListener('mouseout', function() {
+                this.style.transform = '';
+                this.style.backgroundColor = '';
+            });
+        }
+    </script>
+</body>
+</html>
