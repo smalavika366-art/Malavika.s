@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interactive Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #4ca1af, #c4e0e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin: 30px 0 20px;
+            color: #4ca1af;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #e6e6e6;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h3 {
+            color: #c4e0e5;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3 span {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .code-example {
+            background-color: #1e2a35;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            flex-grow: 1;
+        }
+        
+        .tag {
+            color: #f92672;
+        }
+        
+        .attribute {
+            color: #a6e22e;
+        }
+        
+        .value {
+            color: #e6db74;
+        }
+        
+        .comment {
+            color: #75715e;
+        }
+        
+        .button {
+            display: inline-block;
+            background: linear-gradient(90deg, #4ca1af, #2c5364);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .interactive-demo {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .output {
+            background: #1e2a35;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            min-height: 50px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .color-box {
+            width: 100px;
+            height: 100px;
+            margin: 15px auto;
+            border-radius: 10px;
+            transition: all 0.5s ease;
+        }
+        
+        .counter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            margin: 15px 0;
+        }
+        
+        .counter button {
+            background: #4ca1af;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JavaScript Interactive Examples</h1>
+            <p>Learn JavaScript through these interactive examples and demonstrations</p>
+        </header>
+        
+        <main>
+            <section>
+                <h2>JavaScript Basics</h2>
+                <p>JavaScript is a powerful programming language that can add interactivity to your web pages.</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3><span>➊</span> Variables & Data Types</h3>
+                        <div class="code-example">
+                            <span class="comment">// Variables declaration</span><br>
+                            <span class="keyword">let</span> message = <span class="value">"Hello, World!"</span>;<br>
+                            <span class="keyword">const</span> maxCount = <span class="value">100</span>;<br>
+                            <span class="keyword">var</span> isActive = <span class="value">true</span>;<br><br>
+                            
+                            <span class="comment">// Data types</span><br>
+                            <span class="keyword">let</span> number = <span class="value">42</span>; <span class="comment">// Number</span><br>
+                            <span class="keyword">let</span> text = <span class="value">"JavaScript"</span>; <span class="comment">// String</span><br>
+                            <span class="keyword">let</span> isTrue = <span class="value">true</span>; <span class="comment">// Boolean</span><br>
+                            <span class="keyword">let</span> empty = <span class="value">null</span>; <span class="comment">// Null</span>
+                        </div>
+                        <button class="button" onclick="showVariables()">Run Example</button>
+                        <div class="output" id="variables-output"></div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span>➋</span> Functions</h3>
+                        <div class="code-example">
+                            <span class="comment">// Function declaration</span><br>
+                            <span class="keyword">function</span> <span class="attribute">greet</span>(name) {<br>
+                            &nbsp;&nbsp;<span class="keyword">return</span> <span class="value">`Hello, ${name}!`</span>;<br>
+                            }<br><br>
+                            
+                            <span class="comment">// Arrow function (ES6)</span><br>
+                            <span class="keyword">const</span> multiply = (a, b) => a * b;<br><br>
+                            
+                            <span class="comment">// Function call</span><br>
+                            <span class="keyword">let</span> result = multiply(<span class="value">5</span>, <span class="value">7</span>);
+                        </div>
+                        <button class="button" onclick="showFunction()">Run Example</button>
+                        <div class="output" id="function-output"></div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span>➌</span> Conditional Logic</h3>
+                        <div class="code-example">
+                            <span class="keyword">let</span> temperature = <span class="value">22</span>;<br><br>
+                            
+                            <span class="keyword">if</span> (temperature > <span class="value">30</span>) {<br>
+                            &nbsp;&nbsp;console.log(<span class="value">"It's hot outside!"</span>);<br>
+                            } <span class="keyword">else if</span> (temperature > <span class="value">20</span>) {<br>
+                            &nbsp;&nbsp;console.log(<span class="value">"The weather is pleasant"</span>);<br>
+                            } <span class="keyword">else</span> {<br>
+                            &nbsp;&nbsp;console.log(<span class="value">"It's cold outside"</span>);<br>
+                            }
+                        </div>
+                        <button class="button" onclick="showConditional()">Run Example</button>
+                        <div class="output" id="conditional-output"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Interactive Demos</h2>
+                <p>Try these interactive JavaScript demonstrations:</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3><span>➍</span> Counter</h3>
+                        <p>A simple counter that demonstrates state management:</p>
+                        <div class="counter">
+                            <button onclick="decrement()">-</button>
+                            <span id="count">0</span>
+                            <button onclick="increment()">+</button>
+                        </div>
+                        <button class="button" onclick="resetCounter()">Reset Counter</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span>➎</span> Color Changer</h3>
+                        <p>Change the box color with JavaScript:</p>
+                        <div class="color-box" id="color-box"></div>
+                        <button class="button" onclick="changeColor('red')">Red</button>
+                        <button class="button" onclick="changeColor('green')">Green</button>
+                        <button class="button" onclick="changeColor('blue')">Blue</button>
+                        <button class="button" onclick="changeColor('random')">Random Color</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span>➏</span> Array Methods</h3>
+                        <div class="code-example">
+                            <span class="keyword">let</span> fruits = [<span class="value">"Apple"</span>, <span class="value">"Banana"</span>, <span class="value">"Cherry"</span>];<br><br>
+                            
+                            <span class="comment">// Map returns a new array</span><br>
+                            <span class="keyword">let</span> lengths = fruits.map(fruit => fruit.length);<br><br>
+                            
+                            <span class="comment">// Filter returns filtered array</span><br>
+                            <span class="keyword">let</span> longFruits = fruits.filter(fruit => fruit.length > <span class="value">5</span>);
+                        </div>
+                        <button class="button" onclick="showArrayMethods()">Run Example</button>
+                        <div class="output" id="array-output"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>DOM Manipulation</h2>
+                <p>JavaScript can manipulate the Document Object Model (DOM):</p>
+                
+                <div class="interactive-demo">
+                    <h3>Add and Remove List Items</h3>
+                    <button class="button" onclick="addItem()">Add Item</button>
+                    <button class="button" onclick="removeItem()">Remove Item</button>
+                    <button class="button" onclick="clearList()">Clear List</button>
+                    
+                    <ul id="item-list" style="margin-top: 20px; padding-left: 20px;">
+                        <li>Initial Item 1</li>
+                        <li>Initial Item 2</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Created as a JavaScript learning resource. This page demonstrates ES6+ JavaScript features and DOM manipulation.</p>
+            <p>All code is contained in a single HTML file with embedded JavaScript.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Variables example
+        function showVariables() {
+            let message = "Hello, World!";
+            const maxCount = 100;
+            var isActive = true;
+            
+            let number = 42;
+            let text = "JavaScript";
+            let isTrue = true;
+            let empty = null;
+            
+            const output = `
+                message: ${message}<br>
+                maxCount: ${maxCount}<br>
+                isActive: ${isActive}<br>
+                number: ${number}<br>
+                text: ${text}<br>
+                isTrue: ${isTrue}<br>
+                empty: ${empty}
+            `;
+            
+            document.getElementById('variables-output').innerHTML = output;
+        }
+        
+        // Function example
+        function showFunction() {
+            function greet(name) {
+                return `Hello, ${name}!`;
+            }
+            
+            const multiply = (a, b) => a * b;
+            
+            let greeting = greet("Developer");
+            let result = multiply(5, 7);
+            
+            const output = `
+                ${greeting}<br>
+                5 multiplied by 7 is ${result}
+            `;
+            
+            document.getElementById('function-output').innerHTML = output;
+        }
+        
+        // Conditional example
+        function showConditional() {
+            let temperature = 22;
+            let message;
+            
+            if (temperature > 30) {
+                message = "It's hot outside!";
+            } else if (temperature > 20) {
+                message = "The weather is pleasant";
+            } else {
+                message = "It's cold outside";
+            }
+            
+            document.getElementById('conditional-output').innerHTML = 
+                `Temperature: ${temperature}°C<br>${message}`;
+        }
+        
+        // Counter functionality
+        let count = 0;
+        function updateCounter() {
+            document.getElementById('count').textContent = count;
+        }
+        function increment() {
+            count++;
+            updateCounter();
+        }
+        function decrement() {
+            count--;
+            updateCounter();
+        }
+        function resetCounter() {
+            count = 0;
+            updateCounter();
+        }
+        
+        // Color changer
+        function changeColor(color) {
+            const colorBox = document.getElementById('color-box');
+            if (color === 'random') {
+                const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+                colorBox.style.backgroundColor = randomColor;
+            } else {
+                colorBox.style.backgroundColor = color;
+            }
+        }
+        
+        // Initialize color box
+        window.onload = function() {
+            changeColor('purple');
+        }
+        
+        // Array methods
+        function showArrayMethods() {
+            let fruits = ["Apple", "Banana", "Cherry"];
+            
+            let lengths = fruits.map(fruit => fruit.length);
+            let longFruits = fruits.filter(fruit => fruit.length > 5);
+            
+            const output = `
+                Original array: ${fruits.join(', ')}<br>
+                Lengths: ${lengths.join(', ')}<br>
+                Fruits with more than 5 characters: ${longFruits.join(', ')}
+            `;
+            
+            document.getElementById('array-output').innerHTML = output;
+        }
+        
+        // DOM manipulation - List items
+        function addItem() {
+            const list = document.getElementById('item-list');
+            const newItem = document.createElement('li');
+            newItem.textContent = `Item ${list.children.length + 1}`;
+            list.appendChild(newItem);
+        }
+        
+        function removeItem() {
+            const list = document.getElementById('item-list');
+            if (list.children.length > 0) {
+                list.removeChild(list.lastChild);
+            }
+        }
+        
+        function clearList() {
+            const list = document.getElementById('item-list');
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
+        }
+    </script>
+</body>
+</html>
